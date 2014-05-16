@@ -1,5 +1,5 @@
 .DS_Store
 .vim/.netrwhist
-.vim/bundle
+#.vim/bundle
 .zsh/zshrc.local
 .zsh/zshenv.local
