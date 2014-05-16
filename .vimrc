@@ -302,7 +302,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = { 'default' : '', 'perl' : $HOME . '/.vim/dict/perl.dict' }
 
