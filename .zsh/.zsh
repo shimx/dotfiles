@@ -1,0 +1,1 @@
+/Users/shimura/dotfiles/.zsh

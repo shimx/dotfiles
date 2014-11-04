@@ -7,7 +7,10 @@ filetype plugin indent off     " Required!
 
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#rc(expand('~/.vim/bundle/'))
+    "call neobundle#rc(expand('~/.vim/bundle/'))
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    call neobundle#end()
 endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -87,7 +90,7 @@ set nohlsearch
 "Diff設定 埋め立て行を表示、常に垂直分割
 set diffopt=filler,vertical
 "コマンドの履歴保存数を指定
-set history=100000
+set history=10000
 "タブ幅を設定
 set tabstop=2
 set softtabstop=2
