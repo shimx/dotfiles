@@ -28,7 +28,6 @@ NeoBundle 'hotchpotch/perldoc-vim'
 " シンタックス系プラグインをバンドル
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
 " 編集履歴管理
 NeoBundle "sjl/gundo.vim"
 
@@ -43,9 +42,6 @@ endif
 call neobundle#end()
 
 filetype plugin indent on     " Required!
-
-" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-NeoBundleCheck
 
 "+----------------------------------------------------------------------------------------+
 "  基本設定
