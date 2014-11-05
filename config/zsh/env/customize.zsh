@@ -10,6 +10,11 @@ export LC_ALL=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
 
 #----------------------------------------
+# local bin path
+#----------------------------------------
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+#----------------------------------------
 # pager settings
 #----------------------------------------
 #
@@ -74,12 +79,49 @@ if grep --help 2>&1 | grep -q -- --color; then
 fi
 
 #----------------------------------------
+# dotfiles
+#----------------------------------------
+# リポジトリルートを使いまわし用に環境変をセット
+DOTFILES_DIR=~/dotfiles
+export DOTFILES_DIR
+
+# リモート環境との連携用に XMODIFIERS をセット
+if [[ $XMODIFIERS != *@dotfiles=* ]]; then
+  export XMODIFIERS="${XMODIFIERS:+"$XMODIFIERS "}@dotfiles=on"
+fi
+
+# XDG Config Directory
+if [[ -n $DOTFILES_DIR ]]; then
+  export XDG_CONFIG_HOME=$DOTFILES_DIR/config
+  export XDG_CACHE_HOME=~/.cache
+  export XDG_DATA_HOME=~/.local/share
+  #export XDG_CACHE_HOME=$DOTFILES_DIR/cache
+  #export XDG_DATA_HOME=$DOTFILES_DIR/local/share
+else
+  export XDG_CONFIG_HOME=~/.config
+  export XDG_CACHE_HOME=~/.cache
+  export XDG_DATA_HOME=~/.local/share
+fi
+
+# Add PATH
+if ! [[ -d $XDG_CACHE_HOME/dotfiles/bin ]]; then
+  mkdir -p "$XDG_CACHE_HOME/dotfiles/bin"
+fi
+export PATH=$XDG_CACHE_HOME/dotfiles/bin:$PATH
+
+#----------------------------------------
 # editor
 #----------------------------------------
 
-export EDITOR=vim
-## vimがなくてもvimでviを起動する。
-if ! type vim > /dev/null 2>&1; then
-    alias vim=vi
+if type nvim > /dev/null 2>&1; then
+  export EDITOR=nvim
+  alias vi=nvim
+elif type vim > /dev/null 2>&1; then
+  export EDITOR=vim
+  alias vi=vim
+else
+  export EDITOR=vi
+  ## vimがなくてもvimでviを起動する。
+  alias vim=vi
 fi
 

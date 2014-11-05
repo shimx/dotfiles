@@ -1,0 +1,200 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+# ファイラ
+[[plugins]]
+repo = 'Shougo/unite.vim'
+[[plugins]]
+repo = 'Shougo/vimfiler'
+
+[[plugins]] # 編集履歴管理
+repo = 'sjl/gundo.vim'
+
+[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてfiletypeを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim', 'vim-textobj-user']
+hook_add = '''
+let g:context_filetype#filetypes = {
+      \ 'sh': [
+      \   {
+      \    'start': '[^<]<<\([''"]\?\)\([a-zA-Z0-9]\+\)\1$',
+      \    'end': '^\1$', 'filetype': '\2',
+      \   },
+      \ ],
+      \}"}}}
+'''
+
+[[plugins]] # vim-precious で <Plug>(textobj-precious-i) を使用したい時に必要。
+repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+
+[[plugins]] # カラースキーマ
+repo = 'w0ng/vim-hybrid'
+hook_add = '''
+  let g:hybrid_custom_term_colors = 1
+  let g:hybrid_reduced_contrast = 0
+  set background=dark
+  " colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
+  " 但し Colorscheme イベントの発生が抑制されないよう nented を付ける。
+  au MyAutoCmd VimEnter * nested colorscheme hybrid
+'''
+
+[[plugins]] # ステータスラインを手軽にかっこ良くする
+repo = 'itchyny/lightline.vim'
+depends = ['vim-hybrid']
+
+[[plugins]] # \r で即時実行
+repo = 'thinca/vim-quickrun'
+
+[[plugins]] # 行末の空白の可視化＆ :FixWhitespace で削除
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # C-pでファイル選択が捗る http://bit.ly/NuXA5u
+repo = 'kien/ctrlp.vim'
+hook_add = '''
+  let g:ctrlp_use_migemo = 1
+'''
+
+[[plugins]] # 行番号の左側にdiffの+-とかが表示されるようにする、[c と ]c で前後のHunkに移動できる。
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  let g:gitgutter_sign_modified = 'M'
+  let g:gitgutter_max_signs = 5000
+  " カレント行のhunkについて diff/add/reset を行うマップを追加
+  nmap <Leader>hs <Plug>GitGutterStageHunk
+  nmap <Leader>ha <Plug>GitGutterStageHunk
+  nmap <Leader>hr <Plug>GitGutterRevertHunk
+  nmap <Leader>hp <Plug>GitGutterPreviewHunk
+  nmap <Leader>hd <Plug>GitGutterPreviewHunk
+'''
+
+[[plugins]] # GstatusとかGblameとかvim内でgit操作が出来る。あとgitcommitモードのmodifiedとかの行でEnterするとファイルに飛べたりする
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+# 簡単コメント、Ctr+/ でカーソル行or選択範囲をコメントトグル
+repo = 'tyru/caw.vim'
+hook_add = '''
+  " C-/ でコメントアウト、ビジュアルモードでは選択範囲が解除されないよう直後にgvを足す
+  nmap <C-_> <Plug>(caw:i:toggle)
+  vmap <C-_> <Plug>(caw:i:toggle)gv
+'''
+
+[[plugins]]
+# :Capture syn とかすると出力をバッファに入れることが出来る
+repo = 'tyru/capture.vim'
+
+[[plugins]]
+# gx でカーソル位置のURLや単語をブラウザで開くorググる
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+  " gs でカーソル下のURLをブラウザで開く
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
+'''
+
+[[plugins]]
+# :Tabularize /, とかでアライン整形（使い方メモ http://teotr.github.io/blog/2011/04/15/tabular/
+repo = 'godlygeek/tabular'
+
+
+## test
+[[plugins]]
+# テストコードへジャンプ
+repo = 'janko-m/vim-test'
+hook_add = '''
+  let g:test#strategy = 'neovim'
+  " mappings
+  nmap <silent> <leader>f :TestNearest<CR>
+  nmap <silent> <leader>i :TestFile<CR>
+  nmap <silent> <leader>a :TestSuite<CR>
+  nmap <silent> <leader>l :TestLast<CR>
+  nmap <silent> <leader>g :TestVisit<CR>
+  " 言語ごとのオプション
+  let test#python#pytest#options = {'nearest': '-v', 'file': '-v', 'suite': '-v'}
+  let test#go#gotest#options     = {'nearest': '-v', 'file': '-v', 'suite': '-v'}
+'''
+
+[[plugins]] # tagsの凄い奴
+repo = 'majutsushi/tagbar'
+hook_add = '''
+  nmap <F8> :TagbarToggle<CR>
+  " auto-ctags
+  let g:auto_ctags = 1
+  let g:auto_ctags_directory_list = ['.git', '.svn']
+  let g:auto_ctags_tags_name = 'tags'
+  let g:auto_ctags_tags_args = '--tag-relative --recurse --sort=yes'
+  let g:auto_ctags_filetype_mode = 1
+'''
+
+[[plugins]] # g> g< gs で引数の位置交換を簡単に行う
+repo = 'machakann/vim-swap'
+
+[[plugins]] # 単語上で K でftに対応したdevdocs検索が出来るようにする http://bit.ly/1sbXZnf
+repo = 'rhysd/devdocs.vim'
+hook_add = '''
+  autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
+'''
+
+[[plugins]]
+# 自動でctagsを実行する
+repo = 'soramugi/auto-ctags.vim'
+
+[[plugins]]
+repo = 'mtscout6/syntastic-local-eslint.vim'
+hook_add = "let g:syntastic_javascript_checkers = ['eslint']"
+
+## syntastic vs neomake
+
+[[plugins]]
+# ファイル保存時にエラー行があればハイライトする
+repo = 'scrooloose/syntastic'
+hook_add = '''
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_error_symbol='✗'
+  let g:syntastic_warning_symbol='⚠'
+  let g:syntastic_style_error_symbol = '✗'
+  let g:syntastic_style_warning_symbol = '⚠'
+  " debug系
+  let g:syntastic_debug = 0
+  let g:syntastic_debug_file = expand('$TMPDIR/syntastic.log')
+  function! s:SyntasticDebugToggle()
+    let g:syntastic_debug = !g:syntastic_debug
+    echo (g:syntastic_debug ? '🔔  Enabled' : '🔕a Disabled').': ' . g:syntastic_debug_file
+  endfunction
+  command! SyntasticDebugToggle :call s:SyntasticDebugToggle()
+  " shellcheckの引数メモ
+  " -x      : 変数未定義のチェックなどでsource先ファイルも考慮するようにする
+  " -s basa : shebang が無い場合のデフォルトをbashモードにする
+  let g:syntastic_sh_shellcheck_args = '-x -s bash'
+'''
+
+[[plugins]]
+# asynchronous linter, instead of 'scrooloose/syntastic'
+repo = 'benekastah/neomake'
+hook_add = '''
+  let g:neomake_open_list = 1
+  " autocmd VimEnter,BufWritePost * Neomake
+'''
+
+[[plugins]]
+repo = 'tyru/vim-altercmd'
+hook_add = '''
+  " 使うには初期化処理が必要
+  call altercmd#load()
+  " helpを横分割で右側に開く
+  CAlterCommand h[elp] vertical belowright help
+'''

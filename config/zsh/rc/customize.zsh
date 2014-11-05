@@ -352,20 +352,20 @@ setopt complete_aliases
 ###############################################
 # 他の設定ファイルを読み込む                  #
 ###############################################
-[ -f $HOME/.zsh/zshrc.mine ] && source $HOME/.zsh/zshrc.mine
+#[ -f $HOME/.zsh/zshrc.mine ] && source $HOME/.zsh/zshrc.mine
 
-[ -f $HOME/.zsh/zshrc.alias ] && source $HOME/.zsh/zshrc.alias
+[ -f $HOME/dotfiles/config/zsh/rc/alias.zsh ] && source $HOME/dotfiles/config/zsh/rc/alias.zsh
 
 case "${OSTYPE}" in
   # MacOSX
 darwin*)
   # ここに設定
-  [ -f $HOME/.zsh/zshrc.osx ] && source $HOME/.zsh/zshrc.osx
+  [ -f $HOME/dotfiles/config/zsh/rc/osx.zsh ] && source $HOME/dotfiles/config/zsh/rc/osx.zsh
   ;;
   # Linux
 linux*)
   # ここに設定
-  [ -f $HOME/.zsh/zshrc.linux ] && source $HOME/.zsh/zshrc.linux
+  [ -f $HOME/dotfiles/config/zsh/rc/linux.zsh ] && source $HOME/dotfiles/config/zsh/rc/linux.zsh
   ;;
 esac
 

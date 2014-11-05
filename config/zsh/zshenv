@@ -2,7 +2,7 @@
 # source zshenv
 #----------------------------------------
 
-source ~/.zsh/zshenv
+source ~/dotfiles/config/zsh/env/customize.zsh
 
 #----------------------------------------
 # local settings
