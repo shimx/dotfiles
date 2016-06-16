@@ -86,7 +86,7 @@ hook_add = '''
 # 外部コマンドに依存しないMarkdownプレビュー、open-browser.vimとリアルタイムプレビューできて素敵
 repo = 'kannokanno/previm'
 hook_add = '''
-  " TODO: :PrevimOpen でブラウザを開けるんだがquick-runで開きたい
+  let g:previm_open_cmd = 'open -a Google\ Chrome '
 '''
 
 
@@ -140,13 +140,4 @@ hook_post_source = '''
     endfor
   endif
 '''
-
-
-[[plugins]]
-repo = 'kawaz/batscheck.vim'
-on_ft = ['sh']
-
-[[plugins]]
-repo = 'kawaz/shellcheck.vim'
-on_ft = ['sh']
 
