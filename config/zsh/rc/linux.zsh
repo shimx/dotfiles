@@ -23,10 +23,4 @@ export MAVEN_HOME=/usr/local/apache-maven-2.2.1
 export PATH=$MAVEN_HOME/bin:$PATH
 export MAVEN_OPTS=-Xmx1024M
 
-#rvm
-# if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
-
-export PATH=$PATH:$HOME/.gem/ruby/1.8/bin
-export PATH=/opt/firefox:$PATH
-
 export PATH=$PATH:$HOME/.cabal/bin
