@@ -1,3 +1,45 @@
+###############################################
+# PROMPT override                             #
+###############################################
+# show current branch
+# http://qiita.com/KENJU/items/f4880f0d73b434555511
+# @see
+# http://stackoverflow.com/questions/1128496/to-get-a-prompt-which-indicates-git-branch-in-zsh
+
+if ! [ $USER = "root" ] 
+then
+  local git==git
+  setopt prompt_subst
+  autoload -Uz vcs_info
+  zstyle ':vcs_info:*' actionformats \
+      '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+  zstyle ':vcs_info:*' formats       \
+      '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+  zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+  zstyle ':vcs_info:*' enable git cvs svn
+
+  # or use pre_cmd, see man zshcontrib
+  vcs_info_wrapper() {
+    vcs_info
+    if [ -n "$vcs_info_msg_0_" ]; then
+      echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+    fi
+  }
+  RPROMPT=$'$(vcs_info_wrapper)'$RPROMPT
+fi
+
+###############################################
+# hub config                                  #
+###############################################
+if which hub > /dev/null
+then
+  function git(){hub "$@"} # zsh
+fi
+
+###############################################
+# lang env                                    #
+###############################################
 # pyenv
 # you need to install pyenv by homebrew
 export PYENV_ROOT="$HOME/.pyenv"
