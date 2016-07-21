@@ -173,12 +173,12 @@ setopt prompt_subst
 #SPROMPT="" # 入力ミスを確認する場合に表示されるプロンプト
 #RPROMPT="" # 右に表示したいプロンプト(24時間制での現在時刻)
 
-if [ $USER = "root" ] 
+if [ $USER = "root" ]
 then
     PROMPT="%{[31m%}%B%m%b%{[m%} $ % "
     RPROMPT="[%{[31m%}%~ %T%{[m%}]"
-    PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin
     HOME=/root
+    path=(${path} ${sudo_path})
 else
     PROMPT="%{[39m%}[%B%n@%m%b]%{[m%} $ % "
     RPROMPT="[%{[39m%}%~ %T%{[m%}]"

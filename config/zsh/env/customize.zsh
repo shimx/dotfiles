@@ -10,9 +10,38 @@ export LC_ALL=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
 
 #----------------------------------------
+# path settings
+# cf.) http://yonchu.hatenablog.com/entry/20120415/1334506855
+#----------------------------------------
+# path, cdpath, fpath, manpathは
+# zshが管理している環境変数で、
+# 大文字のPATHとも紐付いてる
+#   typeset
+#    -U 重複パスを登録しない
+#    -x exportも同時に行う
+#    -T 環境変数へ紐付け
+#
+#   path=xxxx(N-/)
+#     (N-/): 存在しないディレクトリは登録しない
+#     パス(...): ...という条件にマッチするパスのみ残す
+#        N: NULL_GLOBオプションを設定。
+#           globがマッチしなかったり存在しないパスを無視する
+#        -: シンボリックリンク先のパスを評価
+#        /: ディレクトリのみ残す
+#        .: 通常のファイルのみ残す
+
+## 重複パスを登録しない
+typeset -U path cdpath fpath manpath
+
+## sudo用のpathを設定
+typeset -xT SUDO_PATH sudo_path
+typeset -U sudo_path
+sudo_path=({/usr/local,/usr,}/sbin(N-/))
+
+#----------------------------------------
 # local bin path
 #----------------------------------------
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+path=({${HOME},/usr/local,}/bin(N-/) ${path})
 
 #----------------------------------------
 # pager settings
@@ -103,11 +132,11 @@ else
   export XDG_DATA_HOME=~/.local/share
 fi
 
-# Add PATH
+# Add path
 if ! [[ -d $XDG_CACHE_HOME/dotfiles/bin ]]; then
   mkdir -p "$XDG_CACHE_HOME/dotfiles/bin"
 fi
-export PATH=$XDG_CACHE_HOME/dotfiles/bin:$PATH
+path=(${XDG_CACHE_HOME}/dotfiles/bin ${path})
 
 #----------------------------------------
 # editor

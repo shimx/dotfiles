@@ -6,21 +6,18 @@ alias ls='ls -alh --color'
 alias vi='/usr/local/bin/vim'
 alias vim='/usr/local/bin/vim'
 
-export PATH
-
 # man path
-MANPATH=/usr/local/man:$MANPATH
-export MANPATH
+manpath=(/usr/local/man(N-/) ${manpath})
 INFOPATH=/usr/local/info:$INFOPATH
 export INFOPATH
 
 # Java
 export JAVA_HOME=/usr/java/default
-export PATH=$JAVA_HOME/bin:$PATH
+path=(${JAVA_HOME}/bin(N-/) ${path})
 
 # Maven2
 export MAVEN_HOME=/usr/local/apache-maven-2.2.1
-export PATH=$MAVEN_HOME/bin:$PATH
 export MAVEN_OPTS=-Xmx1024M
+path=(${MAVEN_HOME}/bin(N-/) ${path})
 
-export PATH=$PATH:$HOME/.cabal/bin
+path=(${path} ${HOME}/.cabal/bin(N-/))
