@@ -5,11 +5,6 @@
 # http://www1.matsue-torisen.co.jp/~naruse/Estab/Tips/zsh.html
 
 ###############################################
-# zsh-completionsを利用する Github => zsh-completions  
-###############################################
-fpath=(~/.zsh-completions $fpath)
-
-###############################################
 # 文字コード設定                              #
 ###############################################
 # LANG
@@ -43,9 +38,11 @@ bindkey "^E" end-of-line            # Ctrl-e
 # 標準の補完設定
 #autoload -U compinit
 #compinit
+# 他の設定を読み込んでから最後にcompinitを行う
+# 本ファイル最後尾に記述
 
 setopt auto_cd             # ディレクトリ名を入力するだけでカレントディレクトリを変更
-setopt auto_pushd          # cd でTabを押すとdir listを表示
+setopt autopushd           # 勝手にpushd cd -でTabを押すとdir listを表示
 setopt pushd_ignore_dups   # ディレクトリスタックに同じディレクトリを追加しないようになる
 setopt auto_menu           # タブキー連打で補完候補を順に表示
 setopt list_packed         # 補完候補を詰めて表示
@@ -86,9 +83,6 @@ zstyle ':zle:*' word-style unspecified
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
-# 勝手にpushd
-setopt autopushd
-
 # エラーメッセージ本文出力に色付け
 e_normal=`echo -e "¥033[0;30m"`
 e_RED=`echo -e "¥033[1;31m"`
@@ -103,10 +97,6 @@ function cwaf() {
 
 # コマンド補完ファイルを置いておくディレクトリを指定
 fpath=($HOME/.zsh/functions/Completion ${fpath})
-
-# 補完を有効化
-autoload -U compinit
-compinit -u
 
 # zshのエディタ機能zedの有効化
 # zsh editor
@@ -371,4 +361,10 @@ esac
 
 ## local固有設定
 [ -f $HOME/.zsh/zshrc.local ] && source $HOME/.zsh/zshrc.local
+
+###############################################
+# 補完設定有効化                              #
+###############################################
+autoload -U compinit
+compinit -u
 
