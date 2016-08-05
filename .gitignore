@@ -2,4 +2,5 @@
 .zsh/zshrc.local
 .zsh/zshenv.local
 .init.vim-rplugin~
+config/htop/htoprc
 !.gitignore
