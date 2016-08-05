@@ -136,7 +136,8 @@ set nowrapscan
 " 新しい行のインデントを現在行と同じにする
 set autoindent
 " 新しい行を作ったときに高度な自動インデントを行う
-set smartindent
+"if .. endifなどインデント幅が合わないのでコメンアウト
+"set smartindent
 " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 " タブの代わりに空白文字を挿入する
@@ -177,7 +178,7 @@ if &encoding !=# 'utf-8'
   set encoding=japan
   set fileencoding=japan
 endif
-  
+
 if has('iconv')
   let s:enc_euc = 'euc-jp'
   let s:enc_jis = 'iso-2022-jp'
@@ -214,7 +215,7 @@ if has('iconv')
   unlet s:enc_euc
   unlet s:enc_jis
 endif
-  
+
 " 日本語を含まない場合は fileencoding に encoding を使うようにする
 if has('autocmd')
   function! AU_ReCheck_FENC()
