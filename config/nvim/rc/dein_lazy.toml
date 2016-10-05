@@ -153,3 +153,17 @@ hook_post_source = '''
   endif
 '''
 
+
+## ruby
+[[plugins]]
+repo = 'osyo-manga/vim-monster'
+on_ft = 'ruby'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = 'ruby'
+
+[[plugins]]
+repo = 'tpope/vim-bundler'
+on_ft = 'ruby'
+
