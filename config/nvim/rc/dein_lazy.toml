@@ -158,6 +158,10 @@ hook_post_source = '''
 [[plugins]]
 repo = 'osyo-manga/vim-monster'
 on_ft = 'ruby'
+hook_add = '''
+  let g:deoplete#omni#input_patterns = {}
+  let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
+'''
 
 [[plugins]]
 repo = 'tpope/vim-rails'
