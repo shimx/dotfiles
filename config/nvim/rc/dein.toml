@@ -8,6 +8,43 @@ build = 'make'
 # ファイラ
 [[plugins]]
 repo = 'Shougo/unite.vim'
+hook_add = '''
+  " 入力モードで開始する
+  let g:unite_enable_start_insert=1
+  " 大文字小文字を区別しない
+  let g:unite_enable_ignore_case = 1
+  let g:unite_enable_smart_case = 1
+
+  nnoremap [unite]    <Nop>
+  nmap     <Space>u [unite]
+  nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+  nnoremap <silent> [unite]f   :<C-u>Unite file_rec<CR>
+  nnoremap <silent> [unite]g   :<C-u>Unite grep<CR>
+  nnoremap <silent> [unite]l   :<C-u>Unite line<CR>
+  nnoremap <silent> [unite]u   :<C-u>Unite file_mru<CR>
+  nnoremap <silent> [unite]y   :<C-u>Unite neoyank<CR>
+'''
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+  call denite#custom#var('file_rec', 'command',
+      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var('grep', 'separator', [])
+  call denite#custom#var('grep', 'default_opts',
+      \ ['--nocolor', '--nogroup'])
+
+  nnoremap [denite]    <Nop>
+  nmap     <Space>d [denite]
+  nnoremap <silent> [denite]b   :<C-u>Denite buffer<CR>
+  nnoremap <silent> [denite]f   :<C-u>Denite file_rec<CR>
+  nnoremap <silent> [denite]g   :<C-u>Denite grep<CR>
+  nnoremap <silent> [denite]l   :<C-u>Denite line<CR>
+  nnoremap <silent> [denite]u   :<C-u>Denite file_mru<CR>
+  nnoremap <silent> [denite]y   :<C-u>Denite neoyank<CR>
+'''
 [[plugins]]
 repo = 'Shougo/vimfiler'
 
@@ -22,13 +59,13 @@ repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim', 'vim-textobj-user']
 hook_add = '''
 let g:context_filetype#filetypes = {
-      \ 'sh': [
-      \   {
-      \    'start': '[^<]<<\([''"]\?\)\([a-zA-Z0-9]\+\)\1$',
-      \    'end': '^\1$', 'filetype': '\2',
-      \   },
-      \ ],
-      \}"}}}
+  \ 'sh': [
+  \   {
+  \    'start': '[^<]<<\([''"]\?\)\([a-zA-Z0-9]\+\)\1$',
+  \    'end': '^\1$', 'filetype': '\2',
+  \   },
+  \ ],
+  \}"}}}
 '''
 
 [[plugins]] # vim-precious で <Plug>(textobj-precious-i) を使用したい時に必要。
