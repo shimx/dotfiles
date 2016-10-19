@@ -45,8 +45,6 @@ hook_add = '''
   nnoremap <silent> [denite]u   :<C-u>Denite file_mru<CR>
   nnoremap <silent> [denite]y   :<C-u>Denite neoyank<CR>
 '''
-[[plugins]]
-repo = 'Shougo/vimfiler'
 
 [[plugins]] # 編集履歴管理
 repo = 'sjl/gundo.vim'

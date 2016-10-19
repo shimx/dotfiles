@@ -1,4 +1,12 @@
-[[plugins]] # コード補完
+# ファイラ
+[[plugins]]
+repo = 'Shougo/vimfiler'
+hook_add = '''
+  nnoremap <C-f> :VimFilerBufferDir -split -simple -winwidth=30 -toggle -no-quit<CR>
+'''
+
+# コード補完
+[[plugins]]
 repo = 'Shougo/deoplete.nvim'
 depends = ['context_filetype.vim']
 on_i = 1
