@@ -48,6 +48,9 @@ alias less='less -r'
 # grep
 alias 'gr'='grep --color=auto -ERUIn'
 
+# ag
+alias 'ag'='ag --pager="less -R"'
+
 #make
 alias 'm'='make'
 alias 'mn'='make native-code'
