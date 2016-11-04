@@ -309,6 +309,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
+" Ruby用設定
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
+
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
