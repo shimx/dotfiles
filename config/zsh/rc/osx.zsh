@@ -6,7 +6,7 @@
 # @see
 # http://stackoverflow.com/questions/1128496/to-get-a-prompt-which-indicates-git-branch-in-zsh
 
-if ! [ $USER = "root" ] 
+if ! [ $USER = "root" ]
 then
   local git==git
   setopt prompt_subst
@@ -83,3 +83,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PLENV_ROOT="$HOME/.plenv"
 path=(${PLENV_ROOT}/bin ${path})
 if which plenv > /dev/null; then eval "$(plenv init -)"; fi
+
+###############################################
+# openssl env                                 #
+###############################################
+export OPENSSLENV_ROOT="/usr/local/opt/openssl"
+path=(${OPENSSLENV_ROOT}/bin ${path})
