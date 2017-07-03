@@ -185,19 +185,20 @@ hook_add = '''
 # 自動でctagsを実行する
 repo = 'soramugi/auto-ctags.vim'
 
-[[plugins]]
-repo = 'mtscout6/syntastic-local-eslint.vim'
-hook_add = "let g:syntastic_javascript_checkers = ['eslint']"
-
-## syntastic vs neomake
-
-[[plugins]]
+# Lint
 # ファイル保存時にエラー行があればハイライトする
+# syntastic vs neomake vs ale
+
+[[plugins]]
 repo = 'scrooloose/syntastic'
 hook_add = '''
+  " 他のVimプラグインと競合するのを防ぐ
   let g:syntastic_always_populate_loc_list = 1
+  " 構文エラーリストを表示
   let g:syntastic_auto_loc_list = 1
+  " ファイルを開いた時に構文エラーチェックを実行する
   let g:syntastic_check_on_open = 1
+  " 「:wq」で終了する時も構文エラーチェックする
   let g:syntastic_check_on_wq = 0
   let g:syntastic_error_symbol='✗'
   let g:syntastic_warning_symbol='⚠'
@@ -218,12 +219,44 @@ hook_add = '''
 '''
 
 [[plugins]]
-# asynchronous linter, instead of 'scrooloose/syntastic'
-repo = 'benekastah/neomake'
-hook_add = '''
-  let g:neomake_open_list = 1
-  " autocmd VimEnter,BufWritePost * Neomake
-'''
+repo = 'mtscout6/syntastic-local-eslint.vim'
+hook_add = "let g:syntastic_javascript_checkers = ['eslint']"
+
+#[[plugins]]
+## asynchronous linter, instead of 'scrooloose/syntastic'
+#repo = 'neomake/neomake'
+#hook_add = '''
+#  let g:neomake_open_list = 2
+#  autocmd VimEnter,BufWritePre * Neomake
+#'''
+
+#[[plugins]]
+#repo = 'w0rp/ale'
+#hook_add = '''
+#  " let g:ale_set_loclist = 0
+#  " let g:ale_set_quickfix = 1
+#  let g:ale_open_list = 1
+#  " let g:ale_keep_list_window_open = 1
+#  let g:ale_sign_warning = '⚠'
+#  let g:ale_sign_error = '✗'
+#  let g:ale_statusline_format = ['✗ %d', '⚠ %d', '⬥ ok']
+#  let g:ale_echo_msg_error_str = 'E'
+#  let g:ale_echo_msg_warning_str = 'W'
+#  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+#
+#  " for lightline.vim
+#  let g:lightline = {
+#    \  'active': {
+#    \    'left': [
+#    \      ['mode', 'paste'],
+#    \      ['readonly', 'filename', 'modified', 'ale'],
+#    \    ]
+#    \  },
+#    \  'component_function': {
+#    \    'ale': 'ALEGetStatusLine'
+#    \  }
+#    \}
+#'''
 
 [[plugins]]
 repo = 'tyru/vim-altercmd'
