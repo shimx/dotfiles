@@ -362,9 +362,3 @@ esac
 ## local固有設定
 [ -f $HOME/.zsh/zshrc.local ] && source $HOME/.zsh/zshrc.local
 
-###############################################
-# 補完設定有効化                              #
-###############################################
-autoload -U compinit
-compinit -u
-
