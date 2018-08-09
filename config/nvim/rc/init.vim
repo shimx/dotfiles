@@ -287,8 +287,11 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_smart_case = 1
 " シンタックスをキャッシュするときの最小文字長を3に
 let g:neocomplcache_min_syntax_length = 3
-" 手動補完時に補完を行う入力数を制御
+" 手動補完時に補完を行う入力数を制御。値を小さくすると文字の削除時に重くなる
 let g:neocomplcache_manual_completion_start_length = 0
+" ポップアップメニューで表示される候補の数
+let g:neocomplcache_max_list = 20
+
 let g:neocomplcache_caching_percent_in_statusline = 1
 let g:neocomplcache_enable_skip_completion = 1
 let g:neocomplcache_skip_input_time = '0.5'
