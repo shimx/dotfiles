@@ -1,12 +1,19 @@
 " dein.vimと使った典型的な初期化処理 {{{
+" https://qiita.com/kawaz/items/ee725f6214f91337b42b
+
 " 古臭いvi互換機能を無効化する
-if ! &compatible | set nocompatible | endif
-" nvim スペシャル設定
-if has('nvim') | let $NVIM_TUI_ENABLE_TRUE_COLOR=1 | endif
- " Reset autocmd
+if !&compatible
+  set nocompatible
+endif
+
+" true color使用
+set termguicolors
+
+" Reset autocmd
 augroup MyAutoCmd
   autocmd!
 augroup END
+
 " dein.vim 自体の自動インストール
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let s:dein_dir = s:cache_home . '/dein'
@@ -15,16 +22,21 @@ if !isdirectory(s:dein_repo_dir)
   call system('git clone --depth 1 https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
 endif
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
+
 " プラグイン読み込み＆キャッシュ作成
+" プラグインの追加・削除やtomlファイルの設定を変更した後は
+" 適宜 call dein#update() や call dein#clear_state() を呼んでください。
+" そもそもキャッシュしなくて良いならload_state/save_stateを呼ばないようにしてください。
 let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
 let s:lazy_toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein_lazy.toml'
 if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir, [$MYVIMRC, expand('<sfile>:p'), s:toml_file, s:lazy_toml_file])
+  call dein#begin(s:dein_dir)
   call dein#load_toml(s:toml_file)
   call dein#load_toml(s:lazy_toml_file, {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
+
 " 不足プラグインの自動インストール
 if has('vim_starting') && dein#check_install()
   let g:dein#types#git#clone_depth = 1
