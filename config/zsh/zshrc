@@ -1,5 +1,3 @@
-# TODO : plugin 対応
-
 # Customize to your needs...
 [ -f $HOME/dotfiles/config/zsh/rc/customize.zsh ] && source $HOME/dotfiles/config/zsh/rc/customize.zsh
 
