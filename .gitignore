@@ -2,7 +2,10 @@
 .zsh/zshrc.local
 .zsh/zshenv.local
 .init.vim-rplugin~
-config/htop/htoprc
+config/anyenv
 config/configstore
+config/gh
 config/heroku
+config/htop/htoprc
+config/irb
 !.gitignore
