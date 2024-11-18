@@ -64,25 +64,16 @@ fi
 ###############################################
 # lang env                                    #
 ###############################################
-# pyenv
-# you need to install pyenv by homebrew
-export PYENV_ROOT="$HOME/.pyenv"
-path=(${PYENV_ROOT}/bin ${path})
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-# rbenv
-# you need to install rbenv by homebrew
-export RBENV_ROOT="$HOME/.rbenv"
-path=(${RBENV_ROOT}/bin ${path})
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-# plenv
-# you need to install plenv by homebrew
-#   and cpanm install by homebrew too
-# http://tweeeety.hateblo.jp/entry/2015/05/06/022937
-export PLENV_ROOT="$HOME/.plenv"
-path=(${PLENV_ROOT}/bin ${path})
-if which plenv > /dev/null; then eval "$(plenv init -)"; fi
+# brew installed anyenv
+if command -v anyenv 1>/dev/null 2>&1
+then
+    if ! [ -f /tmp/anyenv.cache ]
+    then
+        anyenv init - --no-rehash > /tmp/anyenv.cache
+        zcompile /tmp/anyenv.cache
+    fi
+    source /tmp/anyenv.cache
+fi
 
 ###############################################
 # openssl env                                 #
