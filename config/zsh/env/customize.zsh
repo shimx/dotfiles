@@ -150,4 +150,4 @@ fi
 # 補完設定有効化
 #----------------------------------------
 autoload -Uz compinit
-compinit
+compinit -C
